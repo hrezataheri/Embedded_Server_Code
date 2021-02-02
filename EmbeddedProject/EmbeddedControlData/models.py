@@ -9,3 +9,4 @@ class WorkingData(models.Model):
     ambient_temp = models.IntegerField(default=30)
     ambient_humidity = models.IntegerField(default=50)
     soil_humidity = models.IntegerField(default=50)
+    check_period = models.IntegerField(default=10)

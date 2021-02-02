@@ -2,22 +2,28 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from .models import WorkingData
+import datetime
+
 from django.core import serializers
 
 
 # Create your views here.
 def getData(request):
+    now = datetime.datetime.now()
     if request.method == 'GET':
         try:
             obj = WorkingData.objects.all().first()
             response = {
                 'exist': True,
+                'current_hour': now.hour,
+                'current_minute': now.minute,
                 'turn_off_led_if_light': obj.turn_off_led_if_light,
                 'light_start_hour': obj.light_start_hour,
                 'light_end_hour': obj.light_end_hour,
                 'ambient_temp': obj.ambient_temp,
                 'ambient_humidity': obj.ambient_humidity,
-                'soil_humidity': obj.soil_humidity
+                'soil_humidity': obj.soil_humidity,
+                'check_period': obj.check_period
             }
             return JsonResponse(response)
         except:
