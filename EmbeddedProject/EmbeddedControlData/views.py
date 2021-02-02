@@ -40,6 +40,7 @@ def setData(request):
     ambient_temp = int(request.GET.get('ambient_temp', 30))
     ambient_humidity = int(request.GET.get('ambient_humidity', 50))
     soil_humidity = int(request.GET.get('soil_humidity', 50))
+    check_period = int(request.GET.get('check_period', 10))
 
     try:
         obj = WorkingData.objects.all().first()
@@ -52,6 +53,7 @@ def setData(request):
                     light_end_hour=light_end_hour,
                     ambient_temp=ambient_temp,
                     ambient_humidity=ambient_humidity,
-                    soil_humidity=soil_humidity)
+                    soil_humidity=soil_humidity,
+                    check_period=check_period)
     w.save()
     return HttpResponse("success")
