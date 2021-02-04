@@ -32,6 +32,105 @@ def getData(request):
     return HttpResponse("hello")
 
 
+def getCurrentHour(request):
+    now = datetime.datetime.now()
+    if request.method == 'GET':
+        try:
+            return HttpResponse(now.hour)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getCurrentMinute(request):
+    now = datetime.datetime.now()
+    if request.method == 'GET':
+        try:
+            return HttpResponse(now.minute)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getTurnOffLEDIfLight(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.turn_off_led_if_light)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getLightStartHour(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.light_start_hour)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getLightEndHour(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.light_end_hour)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getAmbientTemp(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.ambient_temp)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getAmbientHumidity(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.ambient_humidity)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getSoilHumidity(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.soil_humidity)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
+def getCheckPeriod(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.check_period)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
 def setData(request):
 
     turn_off_led_if_light = int(request.GET.get('turn_off_led_if_light', 1))
