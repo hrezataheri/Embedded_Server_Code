@@ -43,6 +43,17 @@ def getCurrentHour(request):
     return HttpResponse("hello")
 
 
+def getCheckPeriod(request):
+    if request.method == 'GET':
+        try:
+            obj = WorkingData.objects.all().first()
+            return HttpResponse(obj.check_period)
+        except:
+            return HttpResponse(-1)
+
+    return HttpResponse("hello")
+
+
 def getCurrentMinute(request):
     now = datetime.datetime.now()
     if request.method == 'GET':
@@ -114,17 +125,6 @@ def getSoilHumidity(request):
         try:
             obj = WorkingData.objects.all().first()
             return HttpResponse(obj.soil_humidity)
-        except:
-            return HttpResponse(-1)
-
-    return HttpResponse("hello")
-
-
-def getCheckPeriod(request):
-    if request.method == 'GET':
-        try:
-            obj = WorkingData.objects.all().first()
-            return HttpResponse(obj.check_period)
         except:
             return HttpResponse(-1)
 
